@@ -1,0 +1,233 @@
+% !TEX root = ../../../main.tex
+
+\toggletrue{image}
+\toggletrue{imagehover}
+\chapterimage{ineffective_sorts}
+\chapterimagetitle{INEFFECTIVE SORTS}
+\chapterimageurl{https://xkcd.com/1185/}
+\chapterimagehover{StackSort connects to StackOverflow, searches for 'sort a list', and downloads and runs code snippets until the list is sorted.}
+
+\chapter{Sortieralgorithmen}
+\label{chapter-sortieralgorithmen}
+
+\newcommand{\sortieralgorithmenLernziele}{
+\protect\begin{todolist}
+\item Sie definieren das Sortierproblem für Zahlen.
+\item Sie erklären das Prinzip eines Sortieralgorithmus.
+\item Sie wenden einen Sortieralgorithmus an.
+\item Sie führen die (asymptotische) Laufzeitanalyse für einen Sortieralgorithmus durch.
+\end{todolist}
+} 
+
+\lernziel{\autoref{chapter-sortieralgorithmen}, \nameref{chapter-sortieralgorithmen}}{\protect\sortieralgorithmenLernziele}
+
+\sortieralgorithmenLernziele
+
+\section{Analyse der asymptotischen Laufzeit:}
+
+\begin{itemize}
+\item \textbf{Elementaroperation}:
+\end{itemize}
+
+\subsection{Best-Case}
+
+\vspace{3cm}
+
+\subsection{Worst-Case}
+
+\vspace{1.25cm}
+
+\begin{table}[htb]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|p{2cm}|p{3cm}|}
+\hline
+Run & Jasskarten ($n=9$) & Allgemein ($n$) \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\section{Analyse der asymptotischen Laufzeit:}
+
+\begin{itemize}
+\item \textbf{Elementaroperation}:
+\end{itemize}
+
+\subsection{Best-Case}
+
+\vspace{5cm}
+
+\subsection{Worst-Case}
+
+\vspace{1.25cm}
+
+\begin{table}[htb]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|p{2cm}|p{3cm}|}
+\hline
+Run & Jasskarten ($n=9$) & Allgemein ($n$) \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+    &            &           \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\section{Analyse der asymptotischen Laufzeit:}
+
+\begin{itemize}
+\item \textbf{Elementaroperation}:
+\end{itemize}
+
+\subsection{Best-Case}
+
+\vspace{3cm}
+
+\subsection{Worst-Case}
+
+\newpage
+
+\section{Analyse der asymptotischen Laufzeit:}
+
+\begin{itemize}
+\item \textbf{Elementaroperation}:
+\end{itemize}
+
+\vspace{5cm}
+
+\subsection{1. Run}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[every node/.style={minimum size=0.75cm, inner sep=0pt}, level/.style={sibling distance=5.5cm/#1}, edge from parent/.style={draw, -latex}]
+\node [circle, draw] (v0) {}
+	child {
+		node [circle, draw] (v1) {}
+		child {
+			node [circle, draw] (v2) {}
+			child {
+				node [circle ,draw, fill=green!25] (v3) {$13$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v4) {$9$}
+			}
+		}
+		child {
+			node [circle, draw] (v5) {}
+			child {
+				node [circle, draw, fill=green!25] (v6) {$10$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v7) {$7$}
+			}
+		}
+   	}
+	child {
+		node [circle, draw] (v8) {}
+		child {
+			node [circle, draw] (v9) {}
+			child {
+				node [circle, draw, fill=green!25] (v10) {$6$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v11) {$11$}
+			}
+		}
+		child {
+			node [circle, draw] (v12) {}
+			child {
+				node [circle, draw, fill=green!25] (v13) {$8$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v14) {$12$}
+			}
+		}
+	};
+\node[right=of v0, font=\bfseries] (l0) {Level 0};
+\node[right=of v8, font=\bfseries] (l1) {Level 1};
+\node[right=of v12, font=\bfseries] (l2) {Level 2};
+\node[right=of v14, font=\bfseries] (l3) {Level 3};
+\end{tikzpicture}
+\end{figure}
+
+\newpage
+
+\subsection{Restliche Runs:}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[every node/.style={minimum size=0.75cm, inner sep=0pt}, level/.style={sibling distance=5.5cm/#1}, edge from parent/.style={draw, -latex}]
+\node [circle, draw] (v0) {}
+	child {
+		node [circle, draw] (v1) {}
+		child {
+			node [circle, draw] (v2) {}
+			child {
+				node [circle ,draw, fill=green!25] (v3) {$13$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v4) {$9$}
+			}
+		}
+		child {
+			node [circle, draw] (v5) {}
+			child {
+				node [circle, draw, fill=green!25] (v6) {$10$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v7) {$7$}
+			}
+		}
+   	}
+	child {
+		node [circle, draw] (v8) {}
+		child {
+			node [circle, draw] (v9) {}
+			child {
+				node [circle, draw, fill=green!25] (v10) {$6$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v11) {$11$}
+			}
+		}
+		child {
+			node [circle, draw] (v12) {}
+			child {
+				node [circle, draw, fill=green!25] (v13) {$8$}
+			}
+			child {
+				node [circle, draw, fill=green!25] (v14) {$12$}
+			}
+		}
+	};
+\node[right=of v0, font=\bfseries] (l0) {Level 0};
+\node[right=of v8, font=\bfseries] (l1) {Level 1};
+\node[right=of v12, font=\bfseries] (l2) {Level 2};
+\node[right=of v14, font=\bfseries] (l3) {Level 3};
+\end{tikzpicture}
+\end{figure}
+
+\newpage
+
+\subsection{Worst Case Laufzeit}
+
+\vspace{3cm}
+
+
+\subimport{bubblesort}{bubblesort}
+
+\subimport{selectionsort}{selectionsort}

@@ -1,0 +1,312 @@
+% !TEX root = ../../../main.tex
+
+% Bibtex
+
+%https://www.ibr.cs.tu-bs.de/alg/Merkzettel/pseudocode-booklet.pdf
+% Abenteuer Informatik
+% Berechenbarkeit Hromkovic
+
+\toggletrue{image}
+\toggletrue{imagehover}
+\chapterimage{here_to_help}
+\chapterimagetitle{\uppercase{Here to Help}}
+\chapterimageurl{https://xkcd.com/1831/}
+\chapterimagehover{"We TOLD you it was hard." "Yeah, but now that I'VE tried, we KNOW it's hard."}
+
+\chapter{Einführung in Algorithmen}
+\label{chapter-einfuehrung-algo}
+
+Wie komme ich mit dem Auto/Zug/eBike am kürzesten von A nach B? Wie wird eine Liste mit \num{10000} Namen alphabetisch sortiert? Wie können wir die Dateigrösse reduzieren? Um diese und andere Fragen kümmert sich das Gebiet der Algorithmen. Die Lernziele lauten wie folgt:
+
+\newcommand{\EinfuehrungAlgoLernziele}{
+\protect\begin{todolist}
+\item Sie definieren, was ein Algorithmus ist.
+\item Sie nennen die sieben Eigenschaften von Algorithmen.
+\item Sie erklären das Modell der Berechnungsschritte.
+\item Sie erklären, was wir unter Pseudocode verstehen.
+\item Sie lösen \say{Mini-Probleme} mit Algorithmen und Pseudocode.
+\end{todolist}
+}
+
+\lernziel{\autoref{chapter-einfuehrung-algo}, \nameref{chapter-einfuehrung-algo}}{\protect\EinfuehrungAlgoLernziele}
+
+\EinfuehrungAlgoLernziele
+
+\section{Was ist ein Algorithmus?}
+
+Wenn wir für ein Problem ein Verfahren zur Lösung entwickeln, welches mit dem Computer gelöst werden kann, dann sprechen wir von Algorithmen. Das Lösungsverfahren kann nur dann mit dem Computer gelöst werden, wenn die Schritte \textbf{möglichst exakt formuliert} sind und die \textbf{Einschränkungen, mit denen ein Computer arbeitet} berücksichtigt werden.
+
+\begin{definition}[Algorithmus]
+	Ein Algorithmus ist eine \say{Schritt-für-Schritt-Anleitung} zur Lösung eines Problems. Die \say{Schritt-für-Schritt-Anleitung} muss exakt und eindeutig sein, sodass sich die Schritte in ein Computerprogramm umsetzen lassen.
+\end{definition}
+
+Die Definition lässt ein paar offene Fragen:
+
+\begin{itemize}
+	\item Welche Eigenschaften muss ein Algorithmus erfüllen?
+	\item Welche Regeln gelten für die Beschreibung der Schritte?
+	\item Wie können wir einen Algorithmus notieren?
+\end{itemize}
+
+\begin{important}
+	Ein Algorithmus muss selbstverständlich ein Problem korrekt lösen. Beim Entwurf von Algorithmen spielt deshalb der Beweis der Korrektheit eine zentrale Rolle. Wir verzichten auf formale Beweise und überlassen die Korrektheit einer mündlichen Argumentation.
+\end{important}
+
+\subsection{Eigenschaften von Algorithmen}
+
+Ein Algorithmus arbeitet nach dem \ac{EVA}-Prinzip. Ein Algorithmus erhält eine \textbf{Eingabe} (eng. input), führt eine \textbf{Verarbeitung} der Eingabe durch und liefert dann die korrekte Lösung durch eine \textbf{Ausgabe} (eng. output). Die Verarbeitung muss dabei in einer \textbf{endlichen Anzahl von Berechnungsschritten} erfolgen und darf nur eine \textbf{endliche Speichergrösse} verwenden. Bei der Beschreibung der Berechnungsschritte muss jeder Berechnungsschritt \textbf{unmissverständlich} formuliert sein. Natürlich muss auch jeder Berechnungsschritt \textbf{durchführbar} sein.
+
+\subsection{Modell der Berechnungsschritte}
+
+Algorithmen müssen durch einen \textbf{Computer} ausgeführt werden können. Deshalb muss jeder Berechnungsschritt so formuliert sein, dass eine Durchführbarkeit mit einem Computer garantiert ist. Wir legen ein paar Regeln fest, welche bei der Beschreibung von Algorithmen zu beachten sind:
+
+\begin{itemize}
+\item Es gibt einen endlichen Speicher mit nummerierten Speicherplätzen. Wir können uns den Speicher als Tabelle vorstellen (siehe \autoref{table-arbeitsspeicher-example}).
+
+\begin{table}[htb]
+\centering
+\begin{tblr}{
+    colspec = {|c|c|c|c|c|c|c|c|c|c|}
+}
+\hline
+\#0  & \#1  & \#2  & \#3  & \#4  & \#5  & \#6  & \#7  & \#8  & \#9  \\ \hline
+$51$     &   $60$   &  $3$    &      &      &      &  $42$    &      &      &      \\ \hline
+\#10 & \#11 & \#12 & \#13 & \#14 & \#15 & \#16 & \#17 & \#18 & \#19 \\ \hline
+     &  $3.5$    &      &      & \text{rot}     &      &      &    $90$  &      &      \\ \hline
+\end{tblr}
+\caption{Wir können verschiedene Werte in einem Speicherplatz speichern.}
+\label{table-arbeitsspeicher-example}
+\end{table}
+
+\item Speichere einen Wert in einen Speicherplatz.
+\item Kopiere den Inhalt eines Speicherplatzes in einen anderen Speicherplatz.
+\item Addiere/Subtrahiere/Multipliziere/Dividiere den Inhalt \textbf{zweier} Speicherplätze und speichere das Ergebnis in einen Speicherplatz.
+\item Vergleiche den Inhalt \textbf{zweier} Speicherplätze.
+\item Führe eine bedingte Anweisung durch.
+\item Wiederhole eine oder mehrere Operationen.
+
+\end{itemize}
+
+Vielleicht stellen Sie fest, dass die Regeln eine Ähnlichkeit zu Programmierelementen besitzen. Dies ist kein Zufall. Ein Algorithmus soll ja gerade in ein Computerprogramm überführbar sein.
+
+\subsection{Notation von Algorithmen}
+
+Die Beschreibung eines Algorithmus kann auf verschiedene Arten erledigt werden. Wir können dabei zum Beispiel \textbf{Prosa} verwenden. \autoref{lst-algo-quersumme} zeigt ein Beispiel.
+
+\begin{lstlisting}[language=pseudocode, caption={Algorithmus für die Quersumme in Prosa.}, label={lst-algo-quersumme}]
+input: Eine natürliche Zahl z.
+Die Quersumme einer gegebenen Zahl z bestimmen wir, 
+indem wir die Ziffern der Zahl z addieren.
+output: Die Quersumme von z.
+\end{lstlisting}
+
+Meist ist bei Algorithmen in Prosa nicht ganz klar, wie ein Berechnungsschritt zu verstehen ist. Wir könnten Algorithmen in einer Programmiersprache formulieren. Manchmal möchten wir uns jedoch nicht in die Details einer Programmiersprache verlieren. Wir wählen deshalb einen Mittelweg zwischen natürlicher Sprache und einer Programmiersprache.
+
+\begin{definition}[Pseudocode]
+	Pseudocode dient der übersichtlichen und eindeutigen Darstellung von Algorithmen. Er ist meist an moderne höhere Programmiersprachen angelehnt, kann aber auch mit natürlicher Sprache gemischt werden. Pseudocode verzichtet auf technische Besonderheiten realer Programmiersprachen und ist dadurch kompakter, sollte sich aber dennoch ohne viel Aufwand in eine reale Implementierung überführen lassen.
+\end{definition}
+
+\autoref{lst-algo-gerade-ungerade} zeigt den Pseudocode für einen Algorithmus, der für eine gegebene ganze Zahl die Eigenschaft \say{gerade} oder \say{ungerade} ermittelt.
+
+\begin{lstlisting}[language=pseudocode, caption={Mit $\gets$ ist \protect\say{abspeichern} gemeint.}, label={lst-algo-gerade-ungerade}]
+input: $z \in \mathbb{N}$ in Speicherplatz #1.
+Speicherplatz #2 $\gets$ Rest der ganzzahligen Division 
+		    von Speicherplatz #1 mit 2
+if Speicherplatz #2 beinhaltet 0 then {
+ output: Gerade
+}
+else {
+ output: Ungerade
+}
+\end{lstlisting}
+
+\section{Ausgewählte Probleme zum Einstieg}
+
+Wir beginnen mit \say{Mini-Problemen}, um erste Schritte im Algorithmenentwurf zu sammeln.
+
+\begin{problem}[Maximum-3-Zahlen]\label{problem-max-3-zahlen}
+	Es sind drei Zahlen gegeben (Speicherplatz $\#1$, $\#2$ und $\#3$). Es soll die \textbf{grösste Zahl} (das Maximum) ausgegeben werden.
+\end{problem}
+
+In \autoref{lst-algo-max-3-zahlen} ist der Algorithmus zur Lösung des Problems mit Pseudocode notiert.
+
+\begin{lstlisting}[language=pseudocode, caption={Algorithmus für das Problem \protect\autoref{problem-max-3-zahlen}. Speicherplatz \#1 wird mit \#1 abgekürzt etc.}, label={lst-algo-max-3-zahlen}]
+input: 3 Zahlen (Speicherplätze: #1, #2, #3)
+if #1 > #2 then {
+ if #1 > #3 then {
+  output: #1
+ }
+}
+elseif #2 > #3 then {
+  output: #2
+}
+else {
+  output: #3
+}
+\end{lstlisting}
+
+Mit $>$ führen wir einen Vergleich durch (siehe \texttt{if}). Falls der Vergleich zutrifft, dann wird alles in den geschweiften Klammern verarbeitet, sonst geht es bei \texttt{else} weiter. Noch ein Problem:
+
+\begin{problem}[Tauschen]\label{problem-tauschen}
+	In Speicherplatz $\#1$ und Speicherplatz $\#2$ ist jeweils eine Zahl gespeichert. Es soll der Inhalt dieser beiden Speicherplätze \textbf{getauscht} werden.
+\end{problem}
+
+Wir können nicht einfach den Inhalt des Speicherplatzes $\#1$ direkt nach $\#2$ kopieren, da dabei der Inhalt von $\#2$ verloren geht. Wir benötigen für den Tausch einen 3. Speicherplatz. \autoref{lst-algo-tauschen} zeigt die Lösung.
+
+\begin{lstlisting}[language=pseudocode, caption={Der Algorithmus funktioniert für zwei beliebige Speicherinhalte.}, label={lst-algo-tauschen}]
+input: Zahl im Speicherplatz #1, Zahl im Speicherplatz #2
+#3 $\gets$ #1
+#1 $\gets$ #2
+#2 $\gets$ #3
+output: Inhalt von #1 und #2 wurden getauscht
+\end{lstlisting}
+
+Betrachten wir nun ein Problem mit einer Rechenoperation. Wir verallgemeinern nun die nummerierten Speicherplätze und gehen zu \textbf{benannten Speicherplätzen} über. Ein benannter Speicherplatz ist nichts anderes als eine \textbf{Variable}. Wir können also ab sofort beliebig viele Variablen verwenden.
+
+\begin{problem}[Addition-3-Zahlen]\label{problem-addition-3-zahlen}
+	Es soll die Summe von drei beliebigen Zahlen ($a$, $b$ und $c$) berechnet und ausgegeben werden.
+\end{problem}
+
+\autoref{lst-algo-addition-3-zahlen} zeigt den Algorithmus für das Problem \autoref{problem-addition-3-zahlen}. Mit \protect\lstinline[language=pseudocode]{summe $\gets$ a + b} meinen wir, dass die Inhalte der Variablen \protect\lstinline[language=pseudocode]{a} und \protect\lstinline[language=pseudocode]{b} addiert werden und das Ergebnis in der Variablen \protect\lstinline[language=pseudocode]{summe} gespeichert wird. Wir schränken uns darauf ein, nur \textbf{zwei Zahlen pro Berechnungsschritt} zu addieren.
+
+\begin{lstlisting}[language=pseudocode, caption={Auf der rechten Seite von $\gets$ in Zeile \num{3} wird in der Variablen \lstinline{summe} der Wert aus der vorherigen Zeile gespeichert. Erst nach der Addition wird das Ergebnis in \lstinline{summe} gespeichert.}, label={lst-algo-addition-3-zahlen}]
+input: 3 Zahlen (a, b und c)
+summe $\gets$ a + b
+summe $\gets$ summe + c
+output: summe
+\end{lstlisting}
+
+Bei den bisherigen Problemen konnten wir ohne eine Schleife lösen. Nun geht es darum, einen Algorithmus zu entwerfen, welcher eine Schleife benötigt.
+
+\begin{problem}[Primzahltest]\label{problem-primzahltest}
+	Es ist eine Zahl $k$ gegeben. Die Ausgabe soll \say{$k$ ist eine Primzahl.} lauten, falls $k$ eine Primzahl ist. Andernfalls soll die Ausgabe \say{$k$ ist keine Primzahl.} lauten.
+\end{problem}
+
+Der Algorithmus für das Problem \autoref{problem-primzahltest}  muss für jede Zahl $k$ funktionieren. Deshalb benötigen wir eine Schleife. Der einfachste Algorithmus für den Primzahltest besteht darin, die Zahl $k$ nacheinander durch alle Zahlen von $2$ bis $k - 1$ zu ganzzahlig zu teilen. Ist der Rest der ganzzahligen Division immer $0$, dann ist es eine Primzahl. \autoref{lst-algo-primzahltest} zeigt den Algorithmus für das \autoref{problem-primzahltest}.
+
+\begin{lstlisting}[language=pseudocode, caption={Algorithmus für das Problem \protect\autoref{problem-primzahltest} mit einer Schleife.}, label={lst-algo-primzahltest}]
+input: Eine Zahl k.
+i $\gets$ 2
+zähler $\gets$ 0
+loop as long as i < zähler {
+ rest $\gets$ k % i
+ if rest = 0 {
+  Erhöhe zähler um 1
+ }
+ Erhöhe i um 1
+}
+if zähler = 0 {
+ output: k ist eine Primzahl.
+}
+else {
+ output: k ist keine Primzahl.
+}
+\end{lstlisting}
+
+Mit \protect\lstinline[language=pseudocode]{k % i} möchten wir ausdrücken, dass wir $k$ ganzzahlig durch $i$ teilen und nur den Rest der ganzzahligen Division verwenden.
+
+\begin{example}
+Drei Rechenbeispiele zur Veranschaulichung: \protect\lstinline[language=pseudocode]{7 % 3} ergibt 1, \protect\lstinline[language=pseudocode]{8 % 2} ergibt 0 und \protect\lstinline[language=pseudocode]{12 % 5} ergibt 2.
+\end{example}
+
+\section{Wortherkunft Algorithmus}
+
+\begin{fancyquotes} 
+Wussten Sie, dass die Herkunft dieses Begriffes nie richtig geklärt wurde? Entweder kommt er vom griechischen \say{arithmos}, was Zahl bedeutet, oder er ist der veränderte Name des persisch-arabischen Mathematikers \say{Al-Charismi}, der - englisch ausgesprochen - in etwa wie \say{algorithm} klingt. Erste Algorithmen wurden übrigens bereits lange vor der Zeitwende hauptsächlich von griechischen Mathematikern entwickelt: Etwa im 4. Jahrhundert v. Chr. das euklidische Verfahren zur Bestimmung des grössten gemeinsamen Teilers zweier Zahlen oder im 3. Jahrhundert v. Chr. das Sieb des Eratosthenes zur Ermittlung von Primzahlen. Beide Algorithmen werden heute noch in Computern eingesetzt.	
+\end{fancyquotes}
+
+\section{Übungen}
+
+\begin{exercise}
+Entwerfen Sie einen Algorithmus in Pseudocode für folgendes Problem.
+
+\begin{problem}[Durchschnitt-3-Zahlen]\label{problem-durchschnitt-3-zahlen}
+Es sind drei Zahlen ($a$, $b$ und $c$) gegeben. Es soll der \textbf{Durchschnitt} der drei Zahlen ausgegeben werden.
+\end{problem}
+
+\textbf{Hinweis}: Sie dürfen in einem Berechnungsschritt maximal zwei Zahlen addieren/subtrahieren/multiplizieren/dividieren.
+
+\fillwithgrid	{1.25in}
+\end{exercise}
+\begin{solution}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=pseudocode, caption={Algorithmus für das Problem \protect\autoref{problem-durchschnitt-3-zahlen}}]
+input: Drei Zahlen a, b und c
+summe $\gets$ a + b
+summe $\gets$ summe + c
+durchschnitt $\gets$ summe / 3
+output: durchschnitt 
+\end{lstlisting}
+\end{minipage}
+\vfill
+\end{solution}
+
+\begin{exercise}
+Entwerfen Sie in Pseudocode einen Algorithmus für das folgende Problem.
+
+\begin{problem}[Median-3-Zahlen]\label{problem-median-3-zahlen}
+Es sind drei Zahlen ($a$, $b$ und $c$) gegeben. Es soll der \textbf{Median} (die mittlere Zahl) der drei Zahlen ausgegeben werden.
+\end{problem}
+
+\textbf{Beispiel}: Es sind die Zahlen $a = 45$, $b = 90$ und $c = 78$ gegeben. Der Median ist $c = 78$.
+
+\fillwithgrid	{\stretch{1}}
+\end{exercise}
+\begin{solution}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=pseudocode, caption={Algorithmus für das Problem \protect\autoref{problem-median-3-zahlen}}]
+input: Drei Zahlen a, b und c
+if b < a und a < c oder b > a und a > c then {
+ output: a
+}
+elseif a < b und b < c oder a > b und b > c then {
+ output: b
+}
+elseif a < c und c < b oder a > c und c > b then {
+ output: c
+}
+\end{lstlisting}
+\end{minipage}
+\vfill
+\end{solution}
+
+\newpage
+
+\begin{exercise}
+Entwerfen Sie in Pseudocode einen Algorithmus für das folgende Problem.
+
+\begin{problem}[ggT-2-Zahlen]\label{problem-ggt-2-zahlen}
+Es sind zwei Zahlen ($a$ und $b$) gegeben. Es soll der \textbf{grösste gemeinsame Teiler} (\acs{ggT}) der beiden Zahlen ausgegeben werden.
+\end{problem}
+
+\textbf{Beispiel}: Es sind die Zahlen $a = 3528$ und $b = 3780$ gegeben. Der \acs{ggT} ist $252$.
+
+\fillwithgrid	{4in}
+\end{exercise}
+\begin{solution}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=pseudocode, caption={Algorithmus für das Problem \protect\autoref{problem-ggt-2-zahlen}}]
+input: Zwei Zahlen a und b
+i $\gets$ 2
+ggT $\gets$ 1
+loop as long as i $\leq$ minimum(a, b) {
+ # Das Prozentzeichen bestimmt den 
+ # Rest der ganzzahligen Division
+ rest_1 $\gets$ a % i
+ rest_2 $\gets$ b % i
+ if rest_1 = 0 und rest_2 = 0 {
+  ggT $\gets$ i
+ }
+ Erhöhe i um 1
+}
+output: ggT
+\end{lstlisting}
+\end{minipage}
+\vfill
+\end{solution}
+
+\begin{exercise}
+Oft wird das Backen eines Kuchens nach einem Rezept als Vergleich für einen Algorithmus genannt. Suchen Sie nach einem Kuchenrezept und entscheiden Sie, ob es sich wirklich ein guter Vergleich ist. Gehen Sie die sieben Eigenschaften eines Algorithmus durch, um Ihre Entscheidung zu treffen. Beurteilen Sie für jede Eigenschaft, ob sie beim Kuchenbacken erfüllt ist oder nicht.
+
+\fillwithgrid	{\stretch{1}}
+\end{exercise}

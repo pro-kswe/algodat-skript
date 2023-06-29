@@ -1,0 +1,485 @@
+\begin{example}
+	Wir setzen das Beispiel aus Phase $1$ fort.
+
+\begin{figure}[htb]
+\begin{tikzpicture}
+\begin{scope}[xshift=0.75cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_2$}, color=violet, label={[violet]south east:\textbf{5}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_5$}, color=blue, label={[blue]south west:\textbf{$\infty$}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north east:$v_6$}, color=blue, label={[blue]north west:\textbf{$\infty$}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_8$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$5$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} (v3);
+    \path[thick] (v3) edge node[below] {$9$}  (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=8cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_2$}, color=violet, label={[violet]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_5$}, color=blue, label={[blue]south west:\textbf{$\infty$}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_8$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[violet, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\path[->, >=stealth', thick] (0,2) edge[bend left=30, above] node[sloped] {$v_3$ hat min. Distanz} (2,2);
+\path[->, >=stealth', thick] (5.5,2) edge[bend left=30, above] node {Aktualisiere $N(v_3)$} (9,2);
+\path[->, >=stealth', thick] (13,2) edge[bend left=30, above] node {$v_2$ hat min. Distanz} (15,2);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_5$}, color=blue, label={[blue]south west:\textbf{$\infty$}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_8$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_5$}, color=violet, label={[violet]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_8$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\path[->, >=stealth', thick] (0,2) edge[bend left=30, above] node {$\cdots$} (1,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {Aktualisiere $N(v_2)$} (8.5,2);
+\path[->, >=stealth', thick] (12.5,2) edge[bend left=30, above] node {Gruppeneinteilung} (14,2);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_5$}, color=violet, label={[violet]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_8$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+    
+    \begin{pgfonlayer}{background}
+        \draw[rounded corners=2em, line width=3em, green!30, cap=round] (v1.center) -- (v2.center) -- (v3.center) -- (v1.center);
+    \end{pgfonlayer}
+    
+    \begin{pgfonlayer}{background}
+        \draw[rounded corners=2em, line width=2.25em, violet!30, cap=round] (v4.center) -- (v6.center) -- (v5.center);
+    \end{pgfonlayer}
+    
+    \begin{pgfonlayer}{background}
+        \draw[rounded corners=2em, line width=2.75em, blue!30, cap=round] (v7.center) -- (v8.center);
+    \end{pgfonlayer}
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]north:$v_8$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\path[->, >=stealth', thick] (-0.5,2) edge[bend left=30, above] node {$\cdots$} (0.5,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {$v_5$ hat min. Distanz} (8.5,2);
+\path[->, >=stealth', thick] (12.5,2) edge[bend left=30, above] node {Aktualisiere $N(v_5)$} (14,2);
+\end{tikzpicture}
+\end{figure}
+
+
+\begin{figure}[htb]
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_4$}, color=violet, label={[violet]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{12}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[violet, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[blue]south:$v_7$}, color=blue, label={[blue]south east:\textbf{$\infty$}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{12}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\path[->, >=stealth', thick] (-0.5,2) edge[bend left=30, above] node {$\cdots$} (0.5,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {$v_4$ hat min. Distanz} (8.5,2);
+\path[->, >=stealth', thick] (12.5,2) edge[bend left=30, above] node {Aktualisiere $N(v_4)$} (14,2);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_7$}, color=violet, label={[violet]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{12}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]south:$v_7$}, color=violet, label={[violet]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{12}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+    
+    \begin{pgfonlayer}{background}
+    	\draw[rounded corners=2em, line width=3em, green!30, cap=round] (v1.center) -- (v2.center) -- (v5.east) -- (v3.center) -- (v4.east) -- (v1.center);
+    \end{pgfonlayer}
+    
+    \begin{pgfonlayer}{background}
+        \draw[rounded corners=2em, line width=2.25em, violet!30, cap=round] (v6.center) -- (v7.south) -- (v8.east) -- (v6.center);
+    \end{pgfonlayer}
+\end{scope}
+
+\path[->, >=stealth', thick] (-0.5,2) edge[bend left=30, above] node {$\cdots$} (0.5,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {Gruppeneinteilung} (8,2);
+\path[->, >=stealth', thick] (12.5,2) edge[bend left=30, above] node {$v_7$ hat min. Distanz} (14,2);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{12}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_7$}, color=darkgreen, label={[darkgreen]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{12}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north east:$v_6$}, color=violet, label={[violet]north west:\textbf{10}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_7$}, color=darkgreen, label={[darkgreen]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{11}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} node[violet, below, near start, thick, sloped] {$\rightarrow$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+\end{scope}
+
+
+\path[->, >=stealth', thick] (-0.5,2) edge[bend left=30, above] node {$\cdots$} (0.5,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {Aktualisiere $N(v_7)$} (8,2);
+\path[->, >=stealth', thick] (12.5,2) edge[bend left=30, above] node {$v_6$ hat min. Distanz} (14,2);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_6$}, color=darkgreen, label={[darkgreen]north west:\textbf{10}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_7$}, color=darkgreen, label={[darkgreen]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{11}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} node[darkgreen, below, near start, thick, sloped] {$\rightarrow$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_6$}, color=darkgreen, label={[darkgreen]north west:\textbf{10}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_7$}, color=darkgreen, label={[darkgreen]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[violet]north:$v_8$}, color=violet, label={[violet]south east:\textbf{11}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} node[darkgreen, below, near start, thick, sloped] {$\rightarrow$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} node[violet, below, near end, thick, sloped] {$\leftarrow$} (v8);
+\end{scope}
+
+
+\path[->, >=stealth', thick] (-0.5,2) edge[bend left=30, above] node {$\cdots$} (0.5,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {Aktualisiere $N(v_6)$} (8,2);
+\path[->, >=stealth', thick] (12.5,2) edge[bend left=30, above] node {$v_8$ hat min. Distanz} (14,2);
+\end{tikzpicture}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htb]
+\begin{tikzpicture}
+\begin{scope}
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_6$}, color=darkgreen, label={[darkgreen]north west:\textbf{10}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_7$}, color=darkgreen, label={[darkgreen]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_8$}, color=darkgreen, label={[darkgreen]south east:\textbf{11}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} node[darkgreen, below, near start, thick, sloped] {$\rightarrow$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v8);
+\end{scope}
+
+\begin{scope}[xshift=7cm]
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_1$}, color=darkgreen, label={[darkgreen]north:\textbf{0}}] (v1) at (0,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_2$}, color=darkgreen, label={[darkgreen]south east:\textbf{4}}] (v2) at (2,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_3$}, color=darkgreen, label={[darkgreen]north west:\textbf{3}}] (v3) at (2,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_4$}, color=darkgreen, label={[darkgreen]north east:\textbf{8}}] (v4) at (2,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_5$}, color=darkgreen, label={[darkgreen]south west:\textbf{7}}] (v5) at (4,2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north east:$v_6$}, color=darkgreen, label={[darkgreen]north west:\textbf{10}}] (v6) at (4,0) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]south:$v_7$}, color=darkgreen, label={[darkgreen]south east:\textbf{9}}] (v7) at (4,-2) {};
+    \node[circle, fill, inner sep=2pt, label={[darkgreen]north:$v_8$}, color=darkgreen, label={[darkgreen]south east:\textbf{11}}] (v8) at (6,0) {};
+    
+ 	\path[thick] (v1) edge node[above] {$4$} (v2);
+    \path[thick] (v1) edge node[below] {$3$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v3);
+    \path[thick] (v1) edge node[below] {$8$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v4);
+    \path[thick] (v2) edge node[above] {$3$} node[darkgreen, above, near end, thick, sloped] {$\leftarrow$} (v5);
+    \path[thick] (v2) edge node[right] {$1$} node[darkgreen, below, thick, sloped] {$\rightarrow$} (v3);
+    \path[thick] (v3) edge node[below] {$9$} (v6);
+    \path[thick] (v3) edge node[right] {$11$} (v4);
+    \path[thick] (v4) edge node[below] {$1$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v7);
+    \path[thick] (v5) edge node[above] {$5$} (v8);
+    \path[thick] (v5) edge node[right] {$5$} (v6);
+    \path[thick] (v6) edge node[below] {$20$} (v8);
+    \path[thick] (v6) edge node[right] {$1$} node[darkgreen, below, near start, thick, sloped] {$\rightarrow$} (v7);
+    \path[thick] (v7) edge node[below] {$2$} node[darkgreen, below, near end, thick, sloped] {$\leftarrow$} (v8);
+\end{scope}
+
+\path[->, >=stealth', thick] (-0.5,2) edge[bend left=30, above] node {$\cdots$} (0.5,2);
+\path[->, >=stealth', thick] (5,2) edge[bend left=30, above] node {Aktualisiere $N(v_8)$} (8,2);
+\path[-|, >=stealth', thick] (12.5,2) edge[above] node {Phase $2$ beendet} (14,2);
+\end{tikzpicture}
+\caption{Alle Schritte der zweiten Phase.}
+\label{figure-dijkstra-bsp-phase-2}
+\end{figure}
+
+\end{example}

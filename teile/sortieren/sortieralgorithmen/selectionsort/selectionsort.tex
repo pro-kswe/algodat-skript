@@ -1,0 +1,22 @@
+\section{Selectionsort}
+
+\begin{lstlisting}[language={pseudocode}, caption={Selectionsort}, label={lst-algo-selectionsort}]
+input: Liste mit n Zahlen
+
+i = 0
+while i < n - 1:
+  aktuellesMinimumIndex = i
+  j = i
+  while j < n:
+    if L[j] < A[aktuellesMinimumIndex] then:
+      % Neues Minimum gefunden
+      aktuellesMinimumIndex = j
+    j = j + 1
+  % Tausche das Minimum an die richtige Stelle
+  tmp = L[i]
+  L[i] = L[aktuellesMinimumIndex]
+  L[aktuellesMinimumIndex] = tmp
+  i = i + 1
+
+output: Sortierte Liste mit n Zahlen
+\end{lstlisting}
